@@ -9,17 +9,20 @@ const AuthLayout = () => {
     const root = document.getElementById('root')
     if (root) {
       root.style.height = '100%'
+      root.style.width = '100%'
     }
     return () => {
-      document.body.style.backgroundImage = `url(${toAbsoluteUrl('media/patterns/header-bg.jpg')})`
+      document.body.style.backgroundImage = `url(${toAbsoluteUrl('media/patterns/header-bg.svg')})`
       if (root) {
         root.style.height = 'auto'
+        
+     
       }
     }
   }, [])
 
   return (
-    <div className='d-flex flex-column flex-lg-row flex-column-fluid h-100'>
+    <div className='w-full h-full d-flex flex-column flex-lg-row flex-column-fluid h-100'>
       {/* begin::Body */}
       <div className='d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1'>
         {/* begin::Form */}

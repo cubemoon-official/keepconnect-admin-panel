@@ -10,7 +10,7 @@ const QuickLinks: FC = () => (
   >
     <div
       className='d-flex flex-column flex-center bgi-no-repeat rounded-top px-10 py-10'
-      style={{backgroundImage: `url('${toAbsoluteUrl('media/misc/menu-header-bg.jpg')}')`}}
+      style={{backgroundImage: `url('${toAbsoluteUrl('media/misc/menu-header-bg.svg')}')`}}
     >
       <h3 className='text-white fw-semibold mb-3'>Quick Links</h3>
 

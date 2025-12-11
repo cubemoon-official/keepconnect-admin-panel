@@ -88,10 +88,10 @@ export function Registration() {
       {/* begin::Heading */}
       <div className='text-center mb-11'>
         {/* begin::Title */}
-        <h1 className='text-gray-900 fw-bolder mb-3'>Sign Up</h1>
+        {/* <h1 className='text-gray-900 fw-bolder mb-3'>Sign Up</h1> */}
         {/* end::Title */}
 
-        <div className='text-gray-500 fw-semibold fs-6'>Your Social Campaigns</div>
+        {/* <div className='text-gray-500 fw-semibold fs-6'>Your Social Campaigns</div> */}
       </div>
       {/* end::Heading */}
 
@@ -100,7 +100,7 @@ export function Registration() {
         {/* begin::Col */}
         <div className='col-md-6'>
           {/* begin::Google link */}
-          <a
+          {/* <a
             href='#'
             className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
           >
@@ -110,7 +110,7 @@ export function Registration() {
               className='h-15px me-3'
             />
             Sign in with Google
-          </a>
+          </a> */}
           {/* end::Google link */}
         </div>
         {/* end::Col */}
@@ -118,7 +118,7 @@ export function Registration() {
         {/* begin::Col */}
         <div className='col-md-6'>
           {/* begin::Google link */}
-          <a
+          {/* <a
             href='#'
             className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
           >
@@ -133,16 +133,16 @@ export function Registration() {
               className='theme-dark-show h-15px me-3'
             />
             Sign in with Apple
-          </a>
+          </a> */}
           {/* end::Google link */}
         </div>
         {/* end::Col */}
       </div>
       {/* end::Login options */}
 
-      <div className='separator separator-content my-14'>
+      {/* <div className='separator separator-content my-14'>
         <span className='w-125px text-gray-500 fw-semibold fs-7'>Or with email</span>
-      </div>
+      </div> */}
 
       {formik.status && (
         <div className='mb-lg-15 alert alert-danger'>
@@ -152,9 +152,9 @@ export function Registration() {
 
       {/* begin::Form group Firstname */}
       <div className='fv-row mb-8'>
-        <label className='form-label fw-bolder text-gray-900 fs-6'>First name</label>
+        <label className='form-label fw-bolder text-gray-900 fs-6'>Full name</label>
         <input
-          placeholder='First name'
+          placeholder='Full name'
           type='text'
           autoComplete='off'
           {...formik.getFieldProps('firstname')}
@@ -179,12 +179,12 @@ export function Registration() {
       {/* end::Form group */}
       <div className='fv-row mb-8'>
         {/* begin::Form group Lastname */}
-        <label className='form-label fw-bolder text-gray-900 fs-6'>Last name</label>
+        <label className='form-label fw-bolder text-gray-900 fs-6'>Business name</label>
         <input
-          placeholder='Last name'
+          placeholder='Business name'
           type='text'
           autoComplete='off'
-          {...formik.getFieldProps('lastname')}
+          {...formik.getFieldProps('businessname')}
           className={clsx(
             'form-control bg-transparent',
             {
@@ -272,13 +272,13 @@ export function Registration() {
           {/* end::Meter */}
         </div>
         <div className='text-muted'>
-          Use 8 or more characters with a mix of letters, numbers & symbols.
+          Use 6 characters with a mix of letters, numbers & symbols.
         </div>
       </div>
       {/* end::Form group */}
 
       {/* begin::Form group Confirm password */}
-      <div className='fv-row mb-5'>
+      {/* <div className='fv-row mb-5'>
         <label className='form-label fw-bolder text-gray-900 fs-6'>Confirm Password</label>
         <input
           type='password'
@@ -302,7 +302,7 @@ export function Registration() {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
       {/* end::Form group */}
 
       {/* begin::Form group */}

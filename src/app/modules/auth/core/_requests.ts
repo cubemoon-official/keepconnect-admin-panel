@@ -3,12 +3,15 @@ import { AuthModel, UserModel } from "./_models";
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
-export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/api/token`;
-export const LOGIN_URL = `${API_URL}/api/login`;
-export const REGISTER_URL = `${API_URL}/register`;
-export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`;
 
-// Server should return AuthModel
+// ✅ CORRECT: Laravel user info route
+export const GET_USER_URL = `${API_URL}/api/me`;
+
+export const LOGIN_URL = `${API_URL}/api/login`;
+export const REGISTER_URL = `${API_URL}/api/register`;
+export const REQUEST_PASSWORD_URL = `${API_URL}/api/forgot_password`;
+
+// --- LOGIN ---
 export function login(email: string, password: string) {
   return axios.post<AuthModel>(LOGIN_URL, {
     email,
@@ -16,7 +19,7 @@ export function login(email: string, password: string) {
   });
 }
 
-// Server should return AuthModel
+// --- REGISTER ---
 export function register(
   email: string,
   firstname: string,
@@ -33,15 +36,18 @@ export function register(
   });
 }
 
-// Server should return object => { result: boolean } (Is Email in DB)
+// --- RESET PASSWORD ---
 export function requestPassword(email: string) {
   return axios.post<{ result: boolean }>(REQUEST_PASSWORD_URL, {
     email,
   });
 }
 
+// --- GET USER USING TOKEN ---
 export function getUserByToken(token: string) {
-  return axios.post<UserModel>(GET_USER_BY_ACCESSTOKEN_URL, {
-    token: token,
+  return axios.get<UserModel>(GET_USER_URL, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 }

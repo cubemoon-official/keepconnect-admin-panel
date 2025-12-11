@@ -108,18 +108,20 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
+
+        
+        <Route
+          path='apps/dailyposts-management/*'
+          element={
+            <SuspensedView>
+                  <DailyPostsPage />
+            </SuspensedView>
+          }
+        />
         {/* Page Not Found */}
         <Route path='*' element={<Navigate to='/error/404' />} />
       </Route>
 
-      <Route
-          path='apps/dailyposts-management/*'
-          element={
-            <SuspensedView>
-              <DailyPostsPage />
-            </SuspensedView>
-          }
-        />
     </Routes>
   )
 }
