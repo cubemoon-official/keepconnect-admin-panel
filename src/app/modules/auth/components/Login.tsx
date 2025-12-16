@@ -15,7 +15,7 @@ export function Login() {
   const formik = useFormik({
     initialValues: {
       email: 'admin@demo.com',
-      password: 'demo',
+      password: 'demo12',
     },
     validationSchema: Yup.object().shape({
       email: Yup.string().email('Wrong email format').required('Email is required'),
@@ -162,6 +162,7 @@ export function Login() {
             }
           )}
         />
+        
         {formik.touched.password && formik.errors.password && (
           <div className='fv-plugins-message-container'>
             <div className='fv-help-block'>

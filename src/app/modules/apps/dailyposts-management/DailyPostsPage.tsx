@@ -172,7 +172,7 @@ const DailyPosts = () => {
         <button
           className="btn btn-danger mt-4 px-4 py-2"
           onClick={handleUpload}
-          style={{ backgroundColor: "#d24444ff" }}
+          style={{ backgroundColor: "#df5757ff" }}
           disabled={loading}
         >
           {loading ? "Uploading..." : "Upload Post"}

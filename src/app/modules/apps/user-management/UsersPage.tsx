@@ -29,6 +29,8 @@ const UsersListWrapper: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<any | null>(null)
   const [submitLoading, setSubmitLoading] = useState(false)
 
+
+
   // ------------------- Fetch Users -------------------
   const fetchUsers = useCallback(async () => {
     try {
@@ -146,6 +148,11 @@ const UsersListWrapper: React.FC = () => {
   // ------------------- Render -------------------
   return (
     <div className='container-fluid mt-15' style={{ maxWidth: '95%' }}>
+      <div className='d-flex align-items-center justify-content-start mb-5'>
+        <h1 className='fw-bold text-white ms-3 mb-6 mt-10' style={{ fontSize: '1.3rem' }}>
+          Users Management
+        </h1>
+      </div>
       <div className='py-5 bg-white rounded-3 shadow-sm px-5'>
         <div className='d-flex justify-content-between mb-4'>
           <h4 className='fw-bold text-primary'>Users List</h4>
@@ -175,10 +182,10 @@ const UsersListWrapper: React.FC = () => {
                     <th
                       key={header.id}
                       className={`py-3 ${header.column.id === 'actions'
-                          ? 'text-end pe-3'
-                          : header.column.id === 'status'
-                            ? 'text-center'
-                            : ''
+                        ? 'text-end pe-3'
+                        : header.column.id === 'status'
+                          ? 'text-center'
+                          : ''
                         }`}
                     >
                       {flexRender(header.column.columnDef.header, header.getContext())}
@@ -189,18 +196,19 @@ const UsersListWrapper: React.FC = () => {
             </thead>
 
             <tbody>
-              {table.getRowModel().rows.length > 0 ? (
-                table.getRowModel().rows.map((row) => (
+              {rows.length > 0 ? (
+                rows.map((row) => (
                   <tr key={row.id} className='fw-semibold'>
                     {row.getVisibleCells().map((cell) => (
                       <td
                         key={cell.id}
-                        className={`${cell.column.id === 'actions'
+                        className={
+                          cell.column.id === 'actions'
                             ? 'text-end pe-3'
                             : cell.column.id === 'status'
                               ? 'text-center'
                               : ''
-                          }`}
+                        }
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </td>
@@ -210,11 +218,12 @@ const UsersListWrapper: React.FC = () => {
               ) : (
                 <tr>
                   <td colSpan={columns.length} className='text-center py-5 text-muted'>
-                    No transactions found.
+                    No users found.
                   </td>
                 </tr>
               )}
             </tbody>
+
           </table>
         </div>
         {/* PAGINATION */}

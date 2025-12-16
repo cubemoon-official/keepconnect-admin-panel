@@ -153,6 +153,7 @@ export function MenuInner() {
       <MenuItem title='Subscription' to='/apps/subscriptions-management/subscriptions'/>
       <MenuItem title='Transactions' to='/apps/transactions-management/transactions'  />
       <MenuItem title='Daily Posts' to='/apps/dailyposts-management/dailyposts'  />
+      <MenuItem title='Message Logs' to='/apps/Messagelogs-management/messaggelogs'  />
     </>
   )
 }

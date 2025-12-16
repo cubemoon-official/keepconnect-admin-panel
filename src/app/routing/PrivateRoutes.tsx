@@ -5,6 +5,7 @@ import TopBarProgress from 'react-topbar-progress-indicator'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
+import MessageLogsPage from '../modules/apps/Messagelogs-management/MesssageLogsPage'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -18,6 +19,7 @@ const PrivateRoutes = () => {
   const TransactionsPage = lazy(() => import('../modules/apps/transactions-management/TransactionsPage'))
   const SubscriptionsPage = lazy(() => import('../modules/apps/subscriptions-management/SubscriptionsPage'))
   const DailyPostsPage = lazy(() => import('../modules/apps/dailyposts-management/DailyPostsPage'))
+  const LogsPage = lazy(() => import('../modules/apps/Messagelogs-management/MesssageLogsPage'))
   return (
     <Routes>
       <Route element={<MasterLayout />}>
@@ -118,6 +120,16 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
+
+        <Route
+          path='apps/Messagelogs-management/*'
+          element={
+            <SuspensedView>
+                  <MessageLogsPage/>
+            </SuspensedView>
+          }
+        />
+
         {/* Page Not Found */}
         <Route path='*' element={<Navigate to='/error/404' />} />
       </Route>

@@ -21,7 +21,7 @@
     "apexcharts": "4.7.0",
     "axios": "^1.13.2",
     "bootstrap": "5.3.5",
-    "bootstrap-icons": "^1.11.3",
+    "bootstrap-icons": "^1.13.1",
     "chart.js": "4.4.9",
     "clsx": "2.1.1",
     "formik": "2.4.6",
