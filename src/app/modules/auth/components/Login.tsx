@@ -144,7 +144,6 @@ export function Login() {
         )}
       </div>
       {/* end::Form group */}
-
       {/* begin::Form group */}
       <div className='fv-row mb-3'>
         <label className='form-label fw-bolder text-gray-900 fs-6 mb-0'>Password</label>
