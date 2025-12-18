@@ -26,26 +26,26 @@ type Props = {
 const UserEditModalForm: FC<Props> = ({ user, isUserLoading = false, onSubmit, onCancel }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const API_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:8000'
+  const API_URL = import.meta.env.VITE_APP_API_URL || 'https://keepconnect.cubemoons.com'
   const token = localStorage.getItem('auth_token')
 
   const formik = useFormik({
     initialValues: user
       ? {
-          name: user.name,
-          email: user.email,
-          phone: user.phone || '',
-          business_name: user.business_name || '',
-          role: user.role || '',
-        }
+        name: user.name,
+        email: user.email,
+        phone: user.phone || '',
+        business_name: user.business_name || '',
+        role: user.role || '',
+      }
       : {
-          name: '',
-          email: '',
-          phone: '',
-          business_name: '',
-          role: '',
-          password: '',
-        },
+        name: '',
+        email: '',
+        phone: '',
+        business_name: '',
+        role: '',
+        password: '',
+      },
 
     validationSchema: Yup.object().shape({
       name: Yup.string().min(3).required('Name is required'),
@@ -53,9 +53,9 @@ const UserEditModalForm: FC<Props> = ({ user, isUserLoading = false, onSubmit, o
       phone: Yup.string().required('Phone number is required'),
       business_name: Yup.string().required('Business name is required'),
       role: Yup.string().required('Role is required'),
-      password: !user
-        ? Yup.string().min(6).required('Password is required')
-        : Yup.string().notRequired(),
+      password: Yup.string()
+        .min(6, 'Password must be at least 6 characters')
+        .required('Password is required'),
     }),
 
     onSubmit: async (values) => {
@@ -69,11 +69,11 @@ const UserEditModalForm: FC<Props> = ({ user, isUserLoading = false, onSubmit, o
 
         const res = user
           ? await axios.put(`${API_URL}/api/admin/users/${user.id}`, payload, {
-              headers: { Authorization: `Bearer ${token}` },
-            })
+            headers: { Authorization: `Bearer ${token}` },
+          })
           : await axios.post(`${API_URL}/api/admin/users`, payload, {
-              headers: { Authorization: `Bearer ${token}` },
-            })
+            headers: { Authorization: `Bearer ${token}` },
+          })
 
         onSubmit(res.data.user || values)
       } catch (error: any) {

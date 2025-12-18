@@ -5,11 +5,12 @@ import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from '@tanstack
 import { UserEditModalForm } from './users-list/user-edit-modal/UserEditModalForm'
 import axios from 'axios'
 
+const API_URL = import.meta.env.VITE_APP_API_URL
 // ------------------- AXIOS CLIENT -------------------
 const TOKEN = localStorage.getItem('auth_token')
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: `${API_URL}/api`,
   headers: { Authorization: TOKEN ? `Bearer ${TOKEN}` : undefined },
 })
 // -----------------------------------------------------

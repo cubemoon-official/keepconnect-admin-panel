@@ -3,7 +3,8 @@ import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-const API_BASE = "http://localhost:8000/api/media";
+const API_BASE = `${import.meta.env.VITE_APP_API_URL}/api/media`;
+
 
 const DailyPosts = () => {
   const [file, setFile] = useState(null);

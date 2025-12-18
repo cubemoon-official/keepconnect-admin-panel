@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import axios from 'axios'
 import clsx from 'clsx'
 
+const API_URL = import.meta.env.VITE_APP_API_URL
 type MediumType = 'all' | 'sms' | 'whatsapp'
 
 interface User {
@@ -34,7 +35,7 @@ const MessageLogsPage: React.FC = () => {
   const TOKEN = localStorage.getItem('auth_token')
 
   const axiosClient = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: `${API_URL}/api`,
     headers: {
       Authorization: TOKEN ? `Bearer ${TOKEN}` : undefined,
     },
