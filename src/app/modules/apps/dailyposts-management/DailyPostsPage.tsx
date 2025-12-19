@@ -116,14 +116,17 @@ const DailyPosts = () => {
   );
 
   return (
-    <div className="p-4 mt-10">
+    <div className="p-4 mt-20">
       <div className='d-flex align-items-center justify-content-start mb-10'>
-        <h1 className='fw-bold mt-10 ' style={{ fontSize: '1.3rem', color: '#fff',marginLeft :'10%'}}>
+        <h1
+          className='fw-bold mt-10'
+          style={{ fontSize: '1.3rem', color: '#fff', marginLeft: '16%' }}
+        >
           Daily Post Management
         </h1>
       </div>
       {/* Upload Card */}
-      <div className="card p-4 py-5 mb-8 shadow-sm" style={{ maxWidth: '75%',marginLeft :'10%'}}>
+      <div className="card p-4 py-5 mb-8 shadow-sm" style={{ maxWidth: '68%', marginLeft: '16%' }}>
         <h5 className="fw-bold mb-3">Upload Daily Post</h5>
 
         <div className="row g-4">
@@ -181,7 +184,7 @@ const DailyPosts = () => {
       </div>
 
       {/* Posts Table */}
-      <div className="card p-4 shadow-sm" style={{ maxWidth: '75%',marginLeft :'10%' }}>
+      <div className="card p-4 shadow-sm" style={{ maxWidth: '68%', marginLeft: '16%' }}>
         <div className="d-flex justify-content-between mb-3">
           <h5 className="fw-bold">Daily Posts List</h5>
           <input
@@ -208,7 +211,7 @@ const DailyPosts = () => {
               return (
                 <tr key={post.id || index}>
                   <td>
-                   {post.url.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
+                    {post.url.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
                       <img
                         src={post.url}
                         width="60"

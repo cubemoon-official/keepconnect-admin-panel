@@ -145,7 +145,7 @@ export const SubscriptionsPage: React.FC = () => {
   })
 
   return (
-    <div className='container-fluid mt-15'>
+    <div className='container-fluid mt-20' style={{ maxWidth: '73%' }}>
       {/* Header */}
       <div className='d-flex align-items-center justify-content-start mb-5'>
         <h1 className='fw-bold text-white ms-15 mb-6 mt-10' style={{ fontSize: '1.3rem' }}>
@@ -167,7 +167,7 @@ export const SubscriptionsPage: React.FC = () => {
       >
         {/* Top Bar */}
         <div className='d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3'>
-          <h4 className='fw-bold text-primary mb-0'>Subscriptions</h4>
+          <h4 className='fw-bold text-primary mb-0'>Subscriptions list</h4>
 
           {/* Search */}
           <div

@@ -110,7 +110,7 @@ const TransactionsPage: React.FC = () => {
   })
 
   return (
-    <div className='container-fluid mt-20' style={{ maxWidth: '95%' }}>
+    <div className='container-fluid mt-20' style={{ maxWidth: '70%' }}>
       {/* 🔹 Page Header */}
       <div
         className='d-flex align-items-center justify-content-start mb-5'
@@ -120,7 +120,7 @@ const TransactionsPage: React.FC = () => {
           color: '#fff',
         }}
       >
-        <h1 className='fw-bold mb-0 ms-0' style={{ fontSize: '1.3rem', letterSpacing: '0.3px', color: '#fff' }}>
+        <h1 className='fw-bold mb-0 ms-0 mt-10' style={{ fontSize: '1.3rem', letterSpacing: '0.3px', color: '#fff' }}>
           Transactions Management
         </h1>
       </div>
