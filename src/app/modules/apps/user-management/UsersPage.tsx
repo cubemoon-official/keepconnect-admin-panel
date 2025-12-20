@@ -115,28 +115,31 @@ const UsersListWrapper: React.FC = () => {
     currentPage * PAGE_SIZE
   )
 
-  // ------------------- Add / Update User -------------------
-  const handleAddUser = async (user: any) => {
-    if (!user.role) return alert('Successfully added user!')
+ // ------------------- Add / Update User -------------------
+const handleAddUser = async (user: any) => {
+  if (!user.role) return 
 
-    setSubmitLoading(true)
+  setSubmitLoading(true)
 
-    try {
-      if (selectedUser) {
-        await axiosClient.put(`/admin/users/${selectedUser.id}`, user)
-      } else {
-        await axiosClient.post('/admin/users', user)
-      }
-
-      await fetchUsers()
-      setIsModalOpen(false)
-      setSelectedUser(null)
-    } catch (err: any) {
-      alert(err.response?.data?.message || 'Validation error!')
-    } finally {
-      setSubmitLoading(false)
+  try {
+    if (selectedUser) {
+      await axiosClient.put(`/admin/users/${selectedUser.id}`, user)
+    } else {
+      await axiosClient.post('/admin/users', user)
     }
+
+    await fetchUsers()
+
+    // ---------------- Auto-close modal ----------------
+    setIsModalOpen(false)
+    setSelectedUser(null)
+  } catch (err: any) {
+    alert(err.response?.data?.message || 'Validation error!')
+  } finally {
+    setSubmitLoading(false)
   }
+}
+
 
   // ------------------- Loader -------------------
   if (loading) {

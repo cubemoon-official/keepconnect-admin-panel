@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 
 const API_BASE = `${import.meta.env.VITE_APP_API_URL}/api/media`;
 
-
 const DailyPosts = () => {
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
@@ -16,6 +15,9 @@ const DailyPosts = () => {
   const [search, setSearch] = useState("");
   const [viewPost, setViewPost] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [type, setType] = useState(""); // image | video
+  const [language, setLanguage] = useState("");
+  const [date, setDate] = useState("");
 
   // ---------------- FETCH POSTS ----------------
   const fetchPosts = async () => {
@@ -117,29 +119,36 @@ const DailyPosts = () => {
 
   return (
     <div className="p-4 mt-20">
-      <div className='d-flex align-items-center justify-content-start mb-10'>
+      <div className="d-flex align-items-center justify-content-start mb-10">
         <h1
-          className='fw-bold mt-10'
-          style={{ fontSize: '1.3rem', color: '#fff', marginLeft: '16%' }}
+          className="fw-bold mt-10"
+          style={{ fontSize: "1.3rem", color: "#fff", marginLeft: "16%" }}
         >
           Daily Post Management
         </h1>
       </div>
       {/* Upload Card */}
-      <div className="card p-4 py-5 mb-8 shadow-sm" style={{ maxWidth: '68%', marginLeft: '16%' }}>
+      <div
+        className="card p-4 py-5 mb-8 shadow-sm"
+        style={{ maxWidth: "68%", marginLeft: "16%" }}
+      >
         <h5 className="fw-bold mb-3">Upload Daily Post</h5>
 
         <div className="row g-4">
+          {/* FILE */}
           <div className="col-md-4">
-            <label className="form-label fw-semibold">Select File (Image/Video)</label>
+            <label className="form-label fw-semibold">
+              Select File (Image / Video)
+            </label>
             <input
               type="file"
               className="form-control"
               onChange={handleFileChange}
             />
+
             {filePreview && (
               <div className="mt-3">
-                {fileType === "poster" ? (
+                {type === "image" ? (
                   <img
                     src={filePreview}
                     alt="preview"
@@ -161,6 +170,35 @@ const DailyPosts = () => {
             )}
           </div>
 
+          {/* TYPE */}
+          <div className="col-md-4">
+            <label className="form-label fw-semibold">Post Type</label>
+            <select
+              className="form-select"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <option value="">Select type</option>
+              <option value="image">Image</option>
+              <option value="video">Video</option>
+            </select>
+          </div>
+
+          {/* LANGUAGE */}
+          <div className="col-md-4">
+            <label className="form-label fw-semibold">Language</label>
+            <select
+              className="form-select"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="English">English</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Tamil">Mararhi</option>
+            </select>
+          </div>
+
+          {/* TITLE */}
           <div className="col-md-4">
             <label className="form-label fw-semibold">Post Title</label>
             <input
@@ -169,6 +207,17 @@ const DailyPosts = () => {
               placeholder="Enter title (optional)"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+
+          {/* DATE */}
+          <div className="col-md-4">
+            <label className="form-label fw-semibold">Post Date</label>
+            <input
+              type="date"
+              className="form-control"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
             />
           </div>
         </div>
@@ -184,7 +233,10 @@ const DailyPosts = () => {
       </div>
 
       {/* Posts Table */}
-      <div className="card p-4 shadow-sm" style={{ maxWidth: '68%', marginLeft: '16%' }}>
+      <div
+        className="card p-4 shadow-sm"
+        style={{ maxWidth: "68%", marginLeft: "16%" }}
+      >
         <div className="d-flex justify-content-between mb-3">
           <h5 className="fw-bold">Daily Posts List</h5>
           <input
@@ -199,8 +251,11 @@ const DailyPosts = () => {
           <thead className="table-light">
             <tr>
               <th>PREVIEW</th>
-              <th>NAME</th>
+              <th>TITLE</th>
               <th>TYPE</th>
+              <th>THUMBNAIL</th>
+              <th>DURATION</th>
+              <th>LANGUAGE</th>
               <th className="text-center">ACTIONS</th>
             </tr>
           </thead>
@@ -232,6 +287,22 @@ const DailyPosts = () => {
                   </td>
                   <td>{post.name || "-"}</td>
                   <td>{post.type || "-"}</td>
+                  <td>
+                    {post.thumbnail ? (
+                      <img
+                        src={post.thumbnail}
+                        width="60"
+                        height="60"
+                        style={{ objectFit: "cover" }}
+                        className="rounded shadow-sm"
+                        alt="Thumbnail"
+                      />
+                    ) : (
+                      "-"
+                    )}
+                  </td>
+                  <td>{post.duration ? `${post.duration} sec` : "-"}</td>
+                  <td>{post.language || "-"}</td>
                   <td className="text-center">
                     <button
                       className="btn btn-sm btn-outline-danger me-2"
