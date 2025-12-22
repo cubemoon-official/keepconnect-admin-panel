@@ -3,6 +3,10 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import clsx from 'clsx'
 import axios from 'axios'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+
 
 // Type for the User
 type User = {
@@ -26,26 +30,26 @@ type Props = {
 const UserEditModalForm: FC<Props> = ({ user, isUserLoading = false, onSubmit, onCancel }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const API_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:8000'
+  const API_URL = import.meta.env.VITE_APP_API_URL || 'https://keepconnect.cubemoons.com'
   const token = localStorage.getItem('auth_token')
 
   const formik = useFormik({
     initialValues: user
       ? {
-          name: user.name,
-          email: user.email,
-          phone: user.phone || '',
-          business_name: user.business_name || '',
-          role: user.role || '',
-        }
+        name: user.name,
+        email: user.email,
+        phone: user.phone || '',
+        business_name: user.business_name || '',
+        role: user.role || '',
+      }
       : {
-          name: '',
-          email: '',
-          phone: '',
-          business_name: '',
-          role: '',
-          password: '',
-        },
+        name: '',
+        email: '',
+        phone: '',
+        business_name: '',
+        role: '',
+        password: '',
+      },
 
     validationSchema: Yup.object().shape({
       name: Yup.string().min(3).required('Name is required'),
@@ -53,43 +57,58 @@ const UserEditModalForm: FC<Props> = ({ user, isUserLoading = false, onSubmit, o
       phone: Yup.string().required('Phone number is required'),
       business_name: Yup.string().required('Business name is required'),
       role: Yup.string().required('Role is required'),
-      password: !user
-        ? Yup.string().min(6).required('Password is required')
-        : Yup.string().notRequired(),
+      password: Yup.string()
+        .min(6, 'Password must be at least 6 characters')
+        .required('Password is required'),
     }),
 
     onSubmit: async (values) => {
       setIsSubmitting(true)
 
       try {
-        let payload = { ...values }
-
-        // remove password if editing
-        if (user) delete payload.password
-
         const res = user
-          ? await axios.put(`${API_URL}/api/admin/users/${user.id}`, payload, {
-              headers: { Authorization: `Bearer ${token}` },
-            })
-          : await axios.post(`${API_URL}/api/admin/users`, payload, {
-              headers: { Authorization: `Bearer ${token}` },
-            })
+          ? await axios.put(`${API_URL}/api/admin/users/${user.id}`, values, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          : await axios.post(`${API_URL}/api/admin/users`, values, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
 
-        onSubmit(res.data.user || values)
+        // ✅ STRICT SUCCESS CHECK
+        if (!res?.data?.user) {
+          toast.error('User not created. Server error.')
+          return
+        }
+
+        // ✅ SUCCESS TOAST
+        toast.success(user ? 'User updated successfully!' : 'User created successfully!')
+
+        onSubmit(res.data.user)
       } catch (error: any) {
         console.error('API error:', error.response?.data)
 
-        if (error.response?.data?.errors) {
-          Object.entries(error.response.data.errors).forEach(
-            ([key, message]) => formik.setFieldError(key, (message as string[])[0])
-          )
-        } else {
-          alert(error.response?.data?.message || 'Something went wrong!')
+        if (error.response?.status === 422) {
+          // ✅ Mark all form fields as touched without showing backend messages
+          Object.keys(formik.values).forEach((field) => {
+            formik.setFieldTouched(field as keyof User, true, false)
+            formik.setFieldError(field as keyof User, '') // No backend error text
+          })
+
+          // 🔔 Show your custom message
+          toast.error('Invalid user data. User was not created.')
+          return
+        }
+        // 🔴 Backend message
+        else if (error.response?.data?.message) {
+        }
+        // 🔴 Unknown error
+        else {
+          toast.error('Something went wrong. Please try again.')
         }
       } finally {
         setIsSubmitting(false)
       }
-    },
+    }
   })
 
   return (
@@ -200,10 +219,11 @@ const UserEditModalForm: FC<Props> = ({ user, isUserLoading = false, onSubmit, o
               </button>
             </div>
           </form>
-
+          <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
         </div>
       </div>
     </div>
+
   )
 }
 

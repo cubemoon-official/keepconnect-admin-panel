@@ -5,11 +5,13 @@ import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from '@tanstack
 import { UserEditModalForm } from './users-list/user-edit-modal/UserEditModalForm'
 import axios from 'axios'
 
+
+const API_URL = import.meta.env.VITE_APP_API_URL
 // ------------------- AXIOS CLIENT -------------------
 const TOKEN = localStorage.getItem('auth_token')
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: `${API_URL}/api`,
   headers: { Authorization: TOKEN ? `Bearer ${TOKEN}` : undefined },
 })
 // -----------------------------------------------------
@@ -113,28 +115,31 @@ const UsersListWrapper: React.FC = () => {
     currentPage * PAGE_SIZE
   )
 
-  // ------------------- Add / Update User -------------------
-  const handleAddUser = async (user: any) => {
-    if (!user.role) return alert('Successfully added user!')
+ // ------------------- Add / Update User -------------------
+const handleAddUser = async (user: any) => {
+  if (!user.role) return 
 
-    setSubmitLoading(true)
+  setSubmitLoading(true)
 
-    try {
-      if (selectedUser) {
-        await axiosClient.put(`/admin/users/${selectedUser.id}`, user)
-      } else {
-        await axiosClient.post('/admin/users', user)
-      }
-
-      await fetchUsers()
-      setIsModalOpen(false)
-      setSelectedUser(null)
-    } catch (err: any) {
-      alert(err.response?.data?.message || 'Validation error!')
-    } finally {
-      setSubmitLoading(false)
+  try {
+    if (selectedUser) {
+      await axiosClient.put(`/admin/users/${selectedUser.id}`, user)
+    } else {
+      await axiosClient.post('/admin/users', user)
     }
+
+    await fetchUsers()
+
+    // ---------------- Auto-close modal ----------------
+    setIsModalOpen(false)
+    setSelectedUser(null)
+  } catch (err: any) {
+    alert(err.response?.data?.message || 'Validation error!')
+  } finally {
+    setSubmitLoading(false)
   }
+}
+
 
   // ------------------- Loader -------------------
   if (loading) {
@@ -147,7 +152,7 @@ const UsersListWrapper: React.FC = () => {
 
   // ------------------- Render -------------------
   return (
-    <div className='container-fluid mt-15' style={{ maxWidth: '95%' }}>
+    <div className='container-fluid mt-20' style={{ maxWidth: '70%' }}>
       <div className='d-flex align-items-center justify-content-start mb-5'>
         <h1 className='fw-bold text-white ms-3 mb-6 mt-10' style={{ fontSize: '1.3rem' }}>
           Users Management

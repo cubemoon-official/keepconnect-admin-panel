@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import axios from 'axios'
 import clsx from 'clsx'
 
+const API_URL = import.meta.env.VITE_APP_API_URL
 type MediumType = 'all' | 'sms' | 'whatsapp'
 
 interface User {
@@ -34,7 +35,7 @@ const MessageLogsPage: React.FC = () => {
   const TOKEN = localStorage.getItem('auth_token')
 
   const axiosClient = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: `${API_URL}/api`,
     headers: {
       Authorization: TOKEN ? `Bearer ${TOKEN}` : undefined,
     },
@@ -97,9 +98,9 @@ const MessageLogsPage: React.FC = () => {
   }
 
   return (
-    <div className="container-fluid mt-10" style={{ maxWidth: '95%' }}>
+    <div className="container-fluid mt-20" style={{ maxWidth: '70%' }}>
       <div className='d-flex align-items-center justify-content-start mb-5'>
-        <h1 className='fw-bold text-white ms-3 mb-6 mt-10' style={{ fontSize: '1.3rem' }}>
+        <h1 className='fw-bold text-white ms-3 mb-6 mt-15' style={{ fontSize: '1.3rem' }}>
           Message Logs Management
         </h1>
       </div>

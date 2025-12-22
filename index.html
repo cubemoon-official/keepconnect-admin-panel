@@ -4,50 +4,104 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#000000" /> <!-- mobile address bar black -->
   <meta name="description" content="Metronic React Demo 2" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-  <title>Metronic  - The World's #1 Selling React & Bootstrap Admin Template by KeenThemes</title>
-  <link rel="shortcut icon" href="media/logos/favicon.ico" />
-  <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-  rel="stylesheet"
-/>
-
+  <title>KeepConnectAdmin</title>
+  <link rel="shortcut icon" href="public/media/logos/keepconnectlogo1.svg" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
   <link rel="stylesheet" id="layout-styles-anchor" href="/splash-screen.css" />
+  <style>
+    /* Only make the splash text black */
+    .splash-screen .loading-text {
+      color: #000;
+      /* black text */
+    }
+  </style>
 </head>
 
 <body id="kt_body" class="page-loading">
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <!--begin::Theme mode setup on page load-->
+
+  <!-- Theme mode setup -->
   <script>
     let themeMode = 'system'
-
     if (localStorage.getItem('kt_theme_mode_value')) {
       themeMode = localStorage.getItem('kt_theme_mode_value')
     }
-
     if (themeMode === 'system') {
       themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
-
     document.documentElement.setAttribute('data-bs-theme', themeMode)
   </script>
-  <!--end::Theme mode setup on page load-->
-
-  <div id="root"></div>
-
-  <!--begin::Loading markup-->
+  <!-- Splash screen -->
   <div id="splash-screen" class="splash-screen">
-    <img src="media/logos/keenthemes-dark.svg" class="dark-logo" alt="Keenthemes dark logo" />
-    <img src="media/logos/keenthemes.svg" class="light-logo" alt="Keenthemes light logo" />
+    <img src="media/logos/Keepconnectlogo.svg" class="dark-logo" alt="Keepconnect dark logo" />
+    <img src="media/logos/Keepconnectlogo.svg" class="light-logo" alt="Keepconnect light logo" />
     <div class="loader-wrapper">
       <span class="loader"></span>
-      <span class="loading-text">Loading...</span>
+      <span class="loading-text">KeepConnect</span> <!-- Black text -->
     </div>
   </div>
-  <!--end::Loading markup-->
 
+  <style>
+    /* Loader customization */
+
+    .splash-screen .loader {
+      border: 4px solid #f3f3f3;
+      /* Light gray background */
+      border-top: 4px solid #E65454;
+      /* Red color */
+      border-radius: 50%;
+      width: 30px;
+      /* bigger loader */
+      height: 30px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      /* inline with text */
+      margin-right: 4px;
+      /* spacing between loader and text */
+      vertical-align: middle;
+      /* align vertically with text */
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Make the splash text dark black and bigger */
+    .splash-screen .loading-text {
+      color: rgb(0, 0, 0);
+      /* Dark black */
+      font-size: 400px;
+      /* Bigger size */
+      font-weight: 1000;
+      /* Bold */
+      display: inline-block;
+      /* inline with loader */
+      vertical-align: middle;
+      /* align vertically with loader */
+    }
+
+    /* Center loader and text together */
+    .loader-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      /* spacing from logo */
+    }
+  </style>
+
+
+
+  <div id="root"></div>
   <div id="root-modals"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
