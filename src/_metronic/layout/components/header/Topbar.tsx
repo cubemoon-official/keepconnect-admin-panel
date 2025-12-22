@@ -116,7 +116,7 @@ const Topbar: FC = () => {
 
             {/* Welcome message next to avatar */}
             <div className='ms-3 d-none d-lg-flex flex-column'>
-              <span className='text-gray-100 fw-bold fs-6  px-3'>Welcome, {currentUser?.first_name}</span>
+              <span className='text-gray-100 fw-bold fs-6  px-3'>Welcome{currentUser?.first_name}</span>
               {/* <span className='text-gray-100 fs-7'>{currentUser?.email}</span> */}
             </div>
 
