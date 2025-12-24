@@ -3,7 +3,7 @@ name: Deploy Frontend to Staging
 on:
   push:
     branches:
-      - main   # change if needed
+      - main
 
 jobs:
   deploy:
@@ -30,6 +30,11 @@ jobs:
           echo "${{ secrets.STAGING_SERVER_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.STAGING_IP }} >> ~/.ssh/known_hosts
+
+      - name: Test SSH connection
+        run: |
+          ssh -o StrictHostKeyChecking=no \
+          ${{ secrets.STAGING_USER }}@${{ secrets.STAGING_IP }} "echo SSH_CONNECTED"
 
       - name: Deploy to EC2
         run: |
